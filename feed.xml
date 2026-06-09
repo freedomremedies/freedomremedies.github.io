@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <title>Freedom Remedies</title>
-    <link href="https://freedomremedies.freedomremedies.workers.dev/feed.xml" rel="self" />
-    <link href="https://freedomremedies.freedomremedies.workers.dev" />
+    <link href="https://gh-pages.freedomremedies.workers.dev/feed.xml" rel="self" />
+    <link href="https://gh-pages.freedomremedies.workers.dev" />
     <updated>2026-06-08T14:41:25-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
-    <id>https://freedomremedies.freedomremedies.workers.dev</id>
+    <id>https://gh-pages.freedomremedies.workers.dev</id>
 
     <entry>
         <title>You can say goodbye to cold sores forever. Yes, it is actually possible. For real.</title>
         <author>
             <name>anonymous</name>
         </author>
-        <link href="https://freedomremedies.freedomremedies.workers.dev/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html"/>
-        <id>https://freedomremedies.freedomremedies.workers.dev/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html</id>
+        <link href="https://gh-pages.freedomremedies.workers.dev/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html"/>
+        <id>https://gh-pages.freedomremedies.workers.dev/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html</id>
             <category term="Articles"/>
 
         <updated>2026-06-08T14:31:26-04:00</updated>
