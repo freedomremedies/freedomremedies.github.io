@@ -3,7 +3,7 @@
     <title>Freedom Remedies</title>
     <link href="https://gh-pages.freedomremedies.workers.dev/feed.xml" rel="self" />
     <link href="https://gh-pages.freedomremedies.workers.dev" />
-    <updated>2026-06-11T02:12:37-04:00</updated>
+    <updated>2026-06-11T03:20:07-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
@@ -16,6 +16,7 @@
         </author>
         <link href="https://gh-pages.freedomremedies.workers.dev/how-to-make-golden-milk.html"/>
         <id>https://gh-pages.freedomremedies.workers.dev/how-to-make-golden-milk.html</id>
+            <category term="Recipes"/>
             <category term="Articles"/>
 
         <updated>2026-06-10T22:01:09-04:00</updated>
