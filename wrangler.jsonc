@@ -2,6 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "gh-pages",
   "compatibility_date": "2026-06-11",
+  "name": "freedomremedies",
+  "compatibility_date": "2026-06-09",
   "observability": {
     "enabled": true
   },
