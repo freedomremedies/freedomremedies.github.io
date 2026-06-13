@@ -3,7 +3,7 @@
     <title>Freedom Remedies</title>
     <link href="https://gh-pages.freedomremedies.workers.dev/feed.xml" rel="self" />
     <link href="https://gh-pages.freedomremedies.workers.dev" />
-    <updated>2026-06-12T22:41:23-04:00</updated>
+    <updated>2026-06-12T22:42:13-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
@@ -22,16 +22,12 @@
         <updated>2026-06-10T22:01:09-04:00</updated>
             <summary type="html">
                 <![CDATA[
-                    How to make golden milk (two ways): one cup raw milk or coconut milk, one tsp turmeric, pinch of black&hellip;
+                    The Golden Latte (Two Ways) /* Base typography matching your system design */ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",&hellip;
                 ]]>
             </summary>
         <content type="html">
             <![CDATA[
-                
-  <p>
-    How to make golden milk (two ways): one cup raw milk or coconut milk, one tsp turmeric, pinch of black pepper, sea salt, cinnamon, and ginger, and sweetener to taste. Optional: you can add 1/2 tsp of ghee (for raw milk) or coconut oil (for coconut milk). Bring all the ingredients to a low simmer, not a boil, for 5-10 minutes, then enjoy hot or warm.
-  </p>
-<div><!DOCTYPE html>
+                <div><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
