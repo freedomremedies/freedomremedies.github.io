@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <title>Freedom Remedies</title>
-    <link href="https://gh-pages.freedomremedies.workers.dev/feed.xml" rel="self" />
-    <link href="https://gh-pages.freedomremedies.workers.dev" />
+    <link href="https://freedomremedies.github.io/feed.xml" rel="self" />
+    <link href="https://freedomremedies.github.io" />
     <updated>2026-06-12T22:55:39-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
-    <id>https://gh-pages.freedomremedies.workers.dev</id>
+    <id>https://freedomremedies.github.io</id>
 
     <entry>
         <title>How to Make Golden Milk</title>
         <author>
             <name>anonymous</name>
         </author>
-        <link href="https://gh-pages.freedomremedies.workers.dev/how-to-make-golden-milk.html"/>
-        <id>https://gh-pages.freedomremedies.workers.dev/how-to-make-golden-milk.html</id>
+        <link href="https://freedomremedies.github.io/how-to-make-golden-milk.html"/>
+        <id>https://freedomremedies.github.io/how-to-make-golden-milk.html</id>
             <category term="Recipes"/>
             <category term="Articles"/>
 
@@ -179,8 +179,8 @@
         <author>
             <name>anonymous</name>
         </author>
-        <link href="https://gh-pages.freedomremedies.workers.dev/how-to-stop-a-cold-sore-fast.html"/>
-        <id>https://gh-pages.freedomremedies.workers.dev/how-to-stop-a-cold-sore-fast.html</id>
+        <link href="https://freedomremedies.github.io/how-to-stop-a-cold-sore-fast.html"/>
+        <id>https://freedomremedies.github.io/how-to-stop-a-cold-sore-fast.html</id>
             <category term="Articles"/>
 
         <updated>2026-06-10T18:51:00-04:00</updated>
@@ -211,8 +211,8 @@
         <author>
             <name>anonymous</name>
         </author>
-        <link href="https://gh-pages.freedomremedies.workers.dev/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html"/>
-        <id>https://gh-pages.freedomremedies.workers.dev/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html</id>
+        <link href="https://freedomremedies.github.io/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html"/>
+        <id>https://freedomremedies.github.io/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html</id>
             <category term="Articles"/>
 
         <updated>2026-06-08T14:31:26-04:00</updated>

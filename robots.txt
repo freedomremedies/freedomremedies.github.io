@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: https://gh-pages.freedomremedies.workers.dev/sitemap.xml
+Sitemap: https://freedomremedies.github.io/sitemap.xml

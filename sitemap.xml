@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="https://gh-pages.freedomremedies.workers.dev/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://freedomremedies.github.io/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/</loc>
+<loc>https://freedomremedies.github.io/</loc>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/about-us.html</loc>
+<loc>https://freedomremedies.github.io/about-us.html</loc>
 <lastmod>2026-06-11T00:15:14-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/articles.html</loc>
+<loc>https://freedomremedies.github.io/articles.html</loc>
 <lastmod>2026-06-12T22:04:45-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/contact-us.html</loc>
+<loc>https://freedomremedies.github.io/contact-us.html</loc>
 <lastmod>2026-06-11T00:16:16-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/ebooks.html</loc>
+<loc>https://freedomremedies.github.io/ebooks.html</loc>
 <lastmod>2026-06-11T21:41:47-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/faqs.html</loc>
+<loc>https://freedomremedies.github.io/faqs.html</loc>
 <lastmod>2026-06-11T01:02:25-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/how-to-make-golden-milk.html</loc>
+<loc>https://freedomremedies.github.io/how-to-make-golden-milk.html</loc>
 <lastmod>2026-06-12T22:50:44-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/how-to-stop-a-cold-sore-fast.html</loc>
+<loc>https://freedomremedies.github.io/how-to-stop-a-cold-sore-fast.html</loc>
 <lastmod>2026-06-12T22:55:39-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/more-testimonials-from-beta-participants.html</loc>
+<loc>https://freedomremedies.github.io/more-testimonials-from-beta-participants.html</loc>
 <lastmod>2026-06-12T21:43:36-04:00</lastmod>
 </url>
 <url>
-<loc>https://gh-pages.freedomremedies.workers.dev/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html</loc>
+<loc>https://freedomremedies.github.io/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real.html</loc>
 <lastmod>2026-06-12T22:04:57-04:00</lastmod>
 </url>
 </urlset>
