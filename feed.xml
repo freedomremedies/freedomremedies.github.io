@@ -3,7 +3,7 @@
     <title>Freedom Remedies</title>
     <link href="https://freedomremedies.github.io/feed.xml" rel="self" />
     <link href="https://freedomremedies.github.io" />
-    <updated>2026-06-21T00:32:53-04:00</updated>
+    <updated>2026-06-21T00:34:31-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
@@ -215,7 +215,7 @@
         <id>https://freedomremedies.github.io/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real/</id>
             <category term="Articles"/>
 
-        <updated>2026-06-21T00:32:53-04:00</updated>
+        <updated>2026-06-21T00:34:31-04:00</updated>
             <summary type="html">
                 <![CDATA[
                     Have you ever had a cold sore? Has it made you feel embarrassed about being seen? Well, guess what? You're&hellip;
@@ -595,34 +595,78 @@
   <p>
     
   </p>
+<div><!-- Universal Minimalist Website Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- 1. The Legal/Health Disclaimer Section -->
+        <div class="footer-disclaimer">
+            <p><strong>Disclaimer:</strong> THE CONTENTS OF THE FREEDOM REMEDIES SITE, SUCH AS TEXT, GRAPHICS, IMAGES, VIDEOS AND OTHER MATERIAL CONTAINED ON THE FREEDOM REMEDIES SITE ("CONTENT") ARE FOR INFORMATIONAL PURPOSES ONLY. THE CONTENT IS NOT INTENDED TO BE A SUBSTITUTE FOR PROFESSIONAL MEDICAL ADVICE, DIAGNOSIS, OR TREATMENT. ALWAYS SEEK THE ADVICE OF YOUR PHYSICIAN OR OTHER QUALIFIED HEALTH PROVIDER WITH ANY QUESTIONS YOU MAY HAVE REGARDING A MEDICAL CONDITION. NEVER DISREGARD PROFESSIONAL MEDICAL ADVICE OR DELAY IN SEEKING IT BECAUSE OF SOMETHING YOU READ ON THE FREEDOM REMEDIES SITE. WE ARE NOT AFFILIATED WITH ANY .GOV SITE AND ANY LINKS FROM THE FREEDOM REMEDIES SITE THAT LINK DIRECTLY TO THEM ARE FOR INFORMATIONAL PURPOSES ONLY. THE STATEMENTS ON THE FREEDOM REMEDIES SITE HAVE NOT BEEN EVALUATED BY THE FDA AND DO NOT CURE, DIAGNOSE OR PREVENT ANY DISEASE. FREEDOM REMEDIES INFORMATION AND PRODUCTS ARE NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.
+We encourage you to do your own research. As a rule of thumb, always try to verify any information that you receive and use your own discernment. Also, please note that nothing on this website or our protocols, is intended to be used as professional or medical advice, diagnosis, or treatment. It is strictly for informational purposes only.
+Results may vary.</p>
+        </div>
+        
+</footer>
 
-  <p>
-    
-  </p>
+<style>
+    /* Clean Footer Base Styles */
+    .site-footer {
+        background-color: #ffffff;
+        border-top: 1px solid #f1f5f9;
+        padding: 48px 20px 24px 20px;
+        margin-top: 80px; /* Pushes the footer away from page content */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+        width: 100%;
+    }
 
-  <p>
-    
-  </p>
+    .footer-container {
+        max-width: 800px; /* Matches your core content block widths */
+        margin: 0 auto;
+    }
 
-  <p>
-    
-  </p>
+    /* Disclaimer Text Area styling */
+    .footer-disclaimer {
+        color: #64748b; /* Soft gray for dense legal text */
+        font-size: 12px;
+        line-height: 1.6;
+        text-align: justify;
+        margin-bottom: 32px;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 24px;
+    }
 
-  <p>
-    
-  </p>
+    .footer-disclaimer p {
+        margin: 0;
+    }
 
-  <p>
-    
-  </p>
+    /* Bottom Copyright Row */
+    .footer-bottom {
+        text-align: center;
+        color: #94a3b8;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
 
-  <p>
-    
-  </p>
+    .footer-bottom p {
+        margin: 0;
+    }
 
-  <p>
-    THE CONTENTS OF THE FREEDOM REMEDIES SITE, SUCH AS TEXT, GRAPHICS, IMAGES, VIDEOS AND OTHER MATERIAL CONTAINED ON THE FREEDOM REMEDIES SITE ("CONTENT") ARE FOR INFORMATIONAL PURPOSES ONLY. THE CONTENT IS NOT INTENDED TO BE A SUBSTITUTE FOR PROFESSIONAL MEDICAL ADVICE, DIAGNOSIS, OR TREATMENT. ALWAYS SEEK THE ADVICE OF YOUR PHYSICIAN OR OTHER QUALIFIED HEALTH PROVIDER WITH ANY QUESTIONS YOU MAY HAVE REGARDING A MEDICAL CONDITION. NEVER DISREGARD PROFESSIONAL MEDICAL ADVICE OR DELAY IN SEEKING IT BECAUSE OF SOMETHING YOU READ ON THE FREEDOM REMEDIES SITE. WE ARE NOT AFFILIATED WITH ANY .GOV SITE AND ANY LINKS FROM THE FREEDOM REMEDIES SITE THAT LINK DIRECTLY TO THEM ARE FOR INFORMATIONAL PURPOSES ONLY. THE STATEMENTS ON THE FREEDOM REMEDIES SITE HAVE NOT BEEN EVALUATED BY THE FDA AND DO NOT CURE, DIAGNOSE OR PREVENT ANY DISEASE. FREEDOM REMEDIES INFORMATION AND PRODUCTS ARE NOT INTENDED TO DIAGNOSE, TREAT, CURE, OR PREVENT ANY DISEASE.<br>We encourage you to do your own research. As a rule of thumb, always try to verify any information that you receive and use your own discernment. Also, please note that nothing on this website or our protocols, is intended to be used as professional or medical advice, diagnosis, or treatment. It is strictly for informational purposes only.<br>Results may vary.
-  </p>
+    /* Mobile screen responsive alignment tuning */
+    @media screen and (max-width: 768px) {
+        .site-footer {
+            padding: 32px 20px 20px 20px;
+            margin-top: 60px;
+        }
+        .footer-disclaimer {
+            text-align: left; /* Easier to read on small vertical viewport lanes */
+            font-size: 11px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+        }
+    }
+</style></div>
             ]]>
         </content>
     </entry>
