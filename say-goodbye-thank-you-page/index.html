@@ -32,8 +32,7 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><style>/* Compact Secure Link Message Box Styling */
-  #access-denied-screen {
+      }</script><style>#access-denied-screen {
     display: none;
     text-align: center;
     margin: 60px auto;
@@ -49,78 +48,48 @@
   #access-denied-screen h2 { font-size: 18px; margin-top: 0; margin-bottom: 8px; font-weight: bold; }
   #access-denied-screen p { font-size: 14px; line-height: 1.5; color: #555555; margin: 0; }
 
-  /* Viewport canvas container holding the floating watermark elements */
   #floating-watermark-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none; /* Allows user to click and scroll the ebook text beneath it */
-    z-index: 9999999;     /* Forces it to hover over absolutely everything */
-    overflow: hidden;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none; z-index: 9999999; overflow: hidden;
   }
 
-  /* RESTORED: Straight horizontal security badges with heavy-bold red layout styling */
   .handshake-badge {
-    position: absolute;
-    padding: 14px 20px;
-    background: rgba(255, 255, 255, 0.15); 
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 900; 
-    letter-spacing: 0.8px;
-    line-height: 1.6;
-    color: #ff3131;   /* Vibrant Red */
-    opacity: 0.35;    /* 35% High-Contrast text density */
-    pointer-events: none;
-    white-space: nowrap;
-    transform: none; 
+    position: absolute; padding: 14px 20px; background: rgba(255, 255, 255, 0.15); 
+    font-family: Arial, sans-serif; font-size: 13px; font-weight: 900; 
+    letter-spacing: 0.8px; line-height: 1.6; color: #ff3131; opacity: 0.35;    
+    pointer-events: none; white-space: nowrap; transform: none; 
     text-shadow: 0px 1px 1px rgba(255,255,255,0.8); 
   }
 
-  /* Floating animation behaviors to dynamically shift positions smoothly */
-  .badge-left {
-    left: 10%;
-    top: 25%;
-    animation: floatLeft 16s ease-in-out infinite alternate;
-  }
+  .badge-left { left: 10%; top: 25%; animation: floatLeft 16s ease-in-out infinite alternate; }
+  .badge-right { right: 10%; top: 60%; animation: floatRight 20s ease-in-out infinite alternate; }
 
-  .badge-right {
-    right: 10%;
-    top: 60%;
-    animation: floatRight 20s ease-in-out infinite alternate;
-  }
-
-  @keyframes floatLeft {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(140px); }
-  }
-
-  @keyframes floatRight {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-160px); }
-  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
-    const currentPath = window.location.pathname;
+  @keyframes floatLeft { 0% { transform: translateY(0px); } 100% { transform: translateY(140px); } }
+  @keyframes floatRight { 0% { transform: translateY(0px); } 100% { transform: translateY(-160px); } }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
+    const currentPath = window.location.pathname.toLowerCase();
 
     // -------------------------------------------------------------------------
-    // 1. ARRANGEMENT: EXACT MATCHED DESTINATION REGISTRY
+    // 1. ARRANGEMENT: EXACT MATCHED DESTINATION REGISTRY (WITH HTML EXTENSIONS)
     // -------------------------------------------------------------------------
     const ebookPages = [
+      '/say-goodbye-protected-ebook-access-page.html',
       '/say-goodbye-protected-ebook-access-page/'
     ];
 
     const thankYouPages = [
+      '/say-goodbye-thank-you-page.html',
       '/say-goodbye-thank-you-page/'
     ];
 
     const cleanLayoutPages = [
+      '/bye-bye-mosquitoes-about-page.html',
       '/bye-bye-mosquitoes-about-page/',
+      '/say-goodbye-to-cold-sores-forever-about-page.html',
       '/say-goodbye-to-cold-sores-forever-about-page/'
     ]; 
 
     // -------------------------------------------------------------------------
-    // ROUTE A: SECURE LOCKDOWN & FLOATING BADGE ENGINE (EBOOK VIEW ONLY)
+    // ROUTE A: FULL LOCKDOWN + WATERMARK GENERATION (EBOOK ONLY)
     // -------------------------------------------------------------------------
     if (ebookPages.some(path => currentPath.includes(path))) {
       const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
@@ -136,13 +105,7 @@
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
         const shortKey   = stripeKey.substring(0, 14) + "...";
 
-        // Structured multi-line horizontal text block strings
-        const watermarkHTML = `
-          LICENSED TO: ${cleanName}<br>
-          EMAIL: ${cleanEmail}<br>
-          ORDER ID: ${shortKey}
-        `;
-
+        const watermarkHTML = `LICENSED TO: ${cleanName}<br>EMAIL: ${cleanEmail}<br>ORDER ID: ${shortKey}`;
         const container = document.getElementById('floating-watermark-container');
         
         const leftBadge = document.createElement('div');
@@ -165,7 +128,6 @@
         }
       }
 
-      // Behavioral Lockdowns
       document.addEventListener('contextmenu', event => event.preventDefault());
       document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'p', 's', 'u'].includes(e.key.toLowerCase())) {
@@ -177,7 +139,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // ROUTE B: SPECIFIC THANK YOU PATH (CLEANS ALL HEADER & TITLE LOGOS)
+    // ROUTE B: SPECIFIC THANK YOU PATH (NOW HIDING WEBSITE TITLE LOGO)
     // -------------------------------------------------------------------------
     if (thankYouPages.some(path => currentPath.includes(path))) {
       const thankYouWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, h1, .post-title, .post__title, .page-title, .page__title, footer, .footer');
@@ -187,7 +149,7 @@
       if (currentParams) {
         const pageLinks = document.querySelectorAll('a');
         pageLinks.forEach(link => {
-          if (link.href.includes('/say-goodbye-protected-ebook-access-page/')) { 
+          if (link.href.includes('say-goodbye-protected-ebook-access-page')) { 
             link.href = 'https://github.io' + currentParams;
           }
         });
@@ -195,7 +157,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // ROUTE C: GENERIC SELECTIVE HIDING FOR MARKETING SUB-PAGES
+    // ROUTE C: GENERIC SELECTIVE HIDING (NO WATERMARK)
     // -------------------------------------------------------------------------
     if (cleanLayoutPages.some(path => currentPath.includes(path))) {
       const simpleHideElements = document.querySelectorAll('nav, .nav, #menu, .menu, h1, .post-title, .post__title, .page-title, .page__title');
