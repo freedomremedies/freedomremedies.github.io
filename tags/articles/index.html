@@ -17,17 +17,33 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><style>#access-denied-screen {
+      }</script><style>/* Compact & Refined Secure Link Message Box Styling */
+  #access-denied-screen {
     display: none;
     text-align: center;
-    margin: 100px auto;
-    padding: 30px;
-    max-width: 500px;
+    margin: 60px auto;
+    padding: 20px 25px;
+    max-width: 420px; /* Reduced from 500px for a more elegant footprint */
     font-family: Arial, sans-serif;
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
     background: #fafafa;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  }
+
+  /* Compact Message Typography Adjustments */
+  #access-denied-screen h2 {
+    font-size: 16px; /* Step-down font sizing */
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  #access-denied-screen p {
+    font-size: 13px; /* Smaller description layout */
+    line-height: 1.5;
+    color: #555555;  /* Soft gray text */
+    margin: 0;
   }
 
   /* Viewport canvas container holding the floating watermark elements */
@@ -144,7 +160,9 @@
         
         if (contentBlock && errorHTML) {
           errorHTML.style.display = 'block';
-          contentBlock.innerHTML = errorHTML.outerHTML;
+          // FIXED DUPLICATION: We assign the raw element directly instead of running an outerHTML string loop
+          contentBlock.innerHTML = ''; 
+          contentBlock.appendChild(errorHTML);
         }
       }
 
@@ -165,8 +183,6 @@
     const isCleanPage = cleanLayoutPages.some(path => currentPath.includes(path));
 
     if (isCleanPage) {
-      // Targeted hiding: Only targets the menu links and post h1 title tags.
-      // Notice that '#header' and '.logo' are completely omitted here so they stay visible!
       const simpleHideElements = document.querySelectorAll('nav, .nav, #menu, .menu, h1, .post-title, .post__title, .page-title, .page__title');
       simpleHideElements.forEach(el => el.style.setProperty('display', 'none', 'important'));
     }
