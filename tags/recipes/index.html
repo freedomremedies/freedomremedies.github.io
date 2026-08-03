@@ -52,7 +52,7 @@
     font-weight: 900; /* Max bold layout weight thickness */
     letter-spacing: 0.8px;
     line-height: 1.6;
-    color: #ff3131;   /* Applied precise red hex request */
+    color: #ff3131;   /* Precise red hex request */
     opacity: 0.35;    /* Increased opacity level significantly to prevent dullness */
     pointer-events: none;
     white-space: nowrap;
@@ -81,13 +81,21 @@
   @keyframes floatRight {
     0% { transform: translateY(0px); }
     100% { transform: translateY(-160px); }
-  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Order Link Required</h2><p>Please access this webpage using the unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
+  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Order Link Required</h2><p>Please access this digital edition via the dynamic redirect link provided instantly upon your Stripe purchase completion.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     // -------------------------------------------------------------------------
     // HARDCODED TESTING PATHWAY
     // -------------------------------------------------------------------------
     const protectedPagePath = '/protected-ebook-test-page/'; 
 
     if (window.location.pathname.includes(protectedPagePath)) {
+      
+      // NEW ADDITION: Forcibly locate and hide common website menu, header, and logo selectors
+      // This strips away global site layouts so it looks like a clean, independent web app
+      const structuralElementsToHide = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, footer, .footer');
+      structuralElementsToHide.forEach(el => {
+        el.style.setProperty('display', 'none', 'important');
+      });
+
       const urlParams = new URLSearchParams(window.location.search);
       const stripeName  = urlParams.get('name');
       const stripeEmail = urlParams.get('email');
@@ -99,7 +107,6 @@
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
         const shortKey   = stripeKey.substring(0, 14) + "...";
 
-        // Rendered as clean, readable horizontal text rows
         const watermarkHTML = `
           LICENSED TO: ${cleanName}<br>
           EMAIL: ${cleanEmail}<br>
