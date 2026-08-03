@@ -216,13 +216,12 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><style>/* Compact & Refined Secure Link Message Box Styling */
-  #access-denied-screen {
+      }</script><style>#access-denied-screen {
     display: none;
     text-align: center;
     margin: 60px auto;
     padding: 20px 25px;
-    max-width: 460px; /* Reduced from 500px for a more elegant footprint */
+    max-width: 460px; 
     font-family: Arial, sans-serif;
     border: 1px solid #e0e0e0;
     border-radius: 6px;
@@ -230,18 +229,17 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.03);
   }
 
-  /* Compact Message Typography Adjustments */
   #access-denied-screen h2 {
-    font-size: 18px; /* Step-down font sizing */
+    font-size: 18px; 
     margin-top: 0;
     margin-bottom: 8px;
     font-weight: bold;
   }
 
   #access-denied-screen p {
-    font-size: 14px; /* Smaller description layout */
+    font-size: 14px; 
     line-height: 1.5;
-    color: #555555;  /* Soft gray text */
+    color: #555555;  
     margin: 0;
   }
 
@@ -252,8 +250,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* Allows user to click and scroll the ebook text beneath it */
-    z-index: 9999999;     /* Forces it to hover over absolutely everything */
+    pointer-events: none; 
+    z-index: 9999999;     
     overflow: hidden;
   }
 
@@ -264,15 +262,15 @@
     background: rgba(255, 255, 255, 0.15); 
     font-family: Arial, sans-serif;
     font-size: 13px;
-    font-weight: 900; /* Max bold layout weight thickness */
+    font-weight: 900; 
     letter-spacing: 0.8px;
     line-height: 1.6;
-    color: #ff3131;   /* Precise red hex request */
-    opacity: 0.35;    /* Increased opacity level significantly to prevent dullness */
+    color: #ff3131;   
+    opacity: 0.35;    
     pointer-events: none;
     white-space: nowrap;
     transform: none; 
-    text-shadow: 0px 1px 1px rgba(255,255,255,0.8); /* Slight light backing shadow to maintain readability */
+    text-shadow: 0px 1px 1px rgba(255,255,255,0.8); 
   }
 
   /* Floating animation behaviors to dynamically shift positions smoothly */
@@ -296,34 +294,32 @@
   @keyframes floatRight {
     0% { transform: translateY(0px); }
     100% { transform: translateY(-160px); }
-  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Order Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
+  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname;
 
     // -------------------------------------------------------------------------
-    // 1. CONFIGURATION: DEFINE YOUR PAGE GROUPS
+    // 1. ARRANGEMENT: ORGANIZED DESTINATION TARGETS
     // -------------------------------------------------------------------------
-    
-    // Pages that get FULL LOCKDOWN + WATERMARK + COMPLETE MENU/HEADER REMOVAL
     const ebookPages = [
       '/protected-ebook-test-page/'
     ];
 
-    // Pages that ONLY hide the menu and page title (WEBSITE NAME STAYS)
+    const thankYouPages = [
+      '/thank-you-page-say-goodbye-ebook/'
+    ];
+
     const cleanLayoutPages = [
       '/bye-bye-mosquitoes-about-page/',
       '/say-goodbye-to-cold-sores-forever-about-page/'
-      '/thank-you-page-say-goodbye-ebook/'
     ]; 
 
     // -------------------------------------------------------------------------
-    // ROUTE A: FULL SECURITY LOCKDOWN (EBOOK PAGES ONLY)
+    // ROUTE A: FULL LOCKDOWN + WATERMARK GENERATION (EBOOK ONLY)
     // -------------------------------------------------------------------------
-    const isEbookPage = ebookPages.some(path => currentPath.includes(path));
-
-    if (isEbookPage) {
-      // Forcibly wipe away headers, footers, logos, menus, and titles completely
-      const totalWipeoutElements = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
-      totalWipeoutElements.forEach(el => el.style.setProperty('display', 'none', 'important'));
+    if (ebookPages.some(path => currentPath.includes(path))) {
+      // Complete removal: wipes menus, links, site headers, titles, and footers
+      const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
+      totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
 
       const urlParams = new URLSearchParams(window.location.search);
       const stripeName  = urlParams.get('name');
@@ -335,12 +331,7 @@
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
         const shortKey   = stripeKey.substring(0, 14) + "...";
 
-        const watermarkHTML = `
-          LICENSED TO: ${cleanName}<br>
-          EMAIL: ${cleanEmail}<br>
-          ORDER ID: ${shortKey}
-        `;
-
+        const watermarkHTML = `LICENSED TO: ${cleanName}<br>EMAIL: ${cleanEmail}<br>ORDER ID: ${shortKey}`;
         const container = document.getElementById('floating-watermark-container');
         
         const leftBadge = document.createElement('div');
@@ -353,14 +344,11 @@
 
         container.appendChild(leftBadge);
         container.appendChild(rightBadge);
-        
       } else {
         const contentBlock = document.querySelector('main') || document.body;
         const errorHTML = document.getElementById('access-denied-screen');
-        
         if (contentBlock && errorHTML) {
           errorHTML.style.display = 'block';
-          // FIXED DUPLICATION: We assign the raw element directly instead of running an outerHTML string loop
           contentBlock.innerHTML = ''; 
           contentBlock.appendChild(errorHTML);
         }
@@ -378,11 +366,30 @@
     }
 
     // -------------------------------------------------------------------------
-    // ROUTE B: SELECTIVE HIDING BLOCK (NO WATERMARK, WEBSITE NAME REMAINS)
+    // NEW ROUTE B: SPECIFIC THANK YOU PATH (NO WATERMARK, WEBSITE NAME STAYS)
     // -------------------------------------------------------------------------
-    const isCleanPage = cleanLayoutPages.some(path => currentPath.includes(path));
+    if (thankYouPages.some(path => currentPath.includes(path))) {
+      // Hides ONLY the menu bar and page title text. 
+      // NOTICE: '#header' and '.site-logo' are excluded so your website name stays active!
+      const thankYouWipeout = document.querySelectorAll('nav, .nav, #menu, .menu, h1, .post-title, .post__title, .page-title, .page__title, footer, .footer');
+      thankYouWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
 
-    if (isCleanPage) {
+      // URL Parameter forwarder for the new layout format
+      const currentParams = window.location.search; 
+      if (currentParams) {
+        const pageLinks = document.querySelectorAll('a');
+        pageLinks.forEach(link => {
+          if (link.href.includes('/protected-ebook-test-page/')) {
+            link.href = 'https://github.io' + currentParams;
+          }
+        });
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // ROUTE C: GENERIC SELECTIVE HIDING (NO WATERMARK)
+    // -------------------------------------------------------------------------
+    if (cleanLayoutPages.some(path => currentPath.includes(path))) {
       const simpleHideElements = document.querySelectorAll('nav, .nav, #menu, .menu, h1, .post-title, .post__title, .page-title, .page__title');
       simpleHideElements.forEach(el => el.style.setProperty('display', 'none', 'important'));
     }
