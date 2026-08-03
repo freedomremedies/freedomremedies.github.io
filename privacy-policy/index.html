@@ -146,7 +146,12 @@
       if (stripeName && stripeEmail && stripeKey && stripeKey.trim().startsWith("cs_")) {
         const cleanName  = decodeURIComponent(stripeName).toUpperCase();
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
-        const shortKey   = stripeKey.substring(0, 14) + "...";
+        
+        // CRASH FIX: Safe string manipulation protection wrap
+        let shortKey = "ORDER_KEY";
+        if (stripeKey && stripeKey.length > 14) {
+          shortKey = stripeKey.substring(0, 14) + "...";
+        }
 
         const watermarkHTML = `LICENSED TO: ${cleanName}<br>EMAIL: ${cleanEmail}<br>ORDER ID: ${shortKey}`;
         const container = document.getElementById('floating-watermark-container');
@@ -188,11 +193,10 @@
 
       const currentParams = window.location.search; 
       if (currentParams) {
-        // BULLETPROOF FIX: We scan every link on the page and force any link containing the word "Access" 
-        // to immediately rewrite its address to the correct secure ebook URL with the parameters.
         const pageLinks = document.querySelectorAll('a');
         pageLinks.forEach(link => {
-          if (link.textContent.toLowerCase().includes('access')) { 
+          // Targets any button link containing your layout address or the text word 'Access'
+          if (link.href.includes('say-goodbye-protected-ebook-access-page') || link.textContent.toLowerCase().includes('access')) { 
             link.href = 'https://github.io' + currentParams;
           }
         });
