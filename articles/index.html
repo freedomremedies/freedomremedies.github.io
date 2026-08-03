@@ -170,18 +170,57 @@
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   }
 
-  /* Fixed pointer-events so users can scroll the ebook through the layer */
-  #security-watermark {
+  /* Container holding the floating watermark elements */
+  #floating-watermark-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; 
-    z-index: 999999; /* Forced above absolutely all ebook content layouts */
-    opacity: 0.05;   /* 5% transparency - subtle but visible pattern */
-    background-repeat: repeat;
-  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Order Link Required</h2><p>Please access this digital edition via the dynamic redirect link provided instantly upon your Stripe purchase completion.</p></div><div id="security-watermark"></div><script>document.addEventListener("DOMContentLoaded", function() {
+    pointer-events: none; /* Allows user to click and scroll the ebook text beneath it */
+    z-index: 9999999;     /* Forces it to hover over absolutely everything */
+    overflow: hidden;
+  }
+
+  /* Universal styling for the enterprise floating badges */
+  .handshake-badge {
+    position: absolute;
+    padding: 12px 18px;
+    background: rgba(240, 240, 240, 0.75); /* Faint frosted-glass backup backdrop */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.14); /* Crisp, darker opacity level */
+    pointer-events: none;
+    white-space: nowrap;
+    transform: rotate(-12deg);  /* Slight rotation mimicking a secure document stamp */
+  }
+
+  /* Floating animation behaviors to dynamically shift positions */
+  .badge-left {
+    left: 8%;
+    top: 25%;
+    animation: floatLeft 16s ease-in-out infinite alternate;
+  }
+
+  .badge-right {
+    right: 8%;
+    top: 60%;
+    animation: floatRight 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatLeft {
+    0% { transform: translateY(0px) rotate(-12deg); }
+    100% { transform: translateY(120px) rotate(-8deg); }
+  }
+
+  @keyframes floatRight {
+    0% { transform: translateY(0px) rotate(-12deg); }
+    100% { transform: translateY(-140px) rotate(-15deg); }
+  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Order Link Required</h2><p>Please access this digital edition via the dynamic redirect link provided instantly upon your Stripe purchase completion.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     // -------------------------------------------------------------------------
     // CHANGE THIS TO YOUR EXACT EBOOK URL SLUG
     // -------------------------------------------------------------------------
@@ -199,12 +238,26 @@
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
         const shortKey   = stripeKey.substring(0, 14) + "...";
 
-        // FIXED: Compressed onto one line, using tspan tags for clean vertical multi-line layout
-        const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250"><g transform="rotate(-25 50,100)"><text x="30" y="80" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="black"><tspan x="30" dy="0">LICENSED TO: ${cleanName}</tspan><tspan x="30" dy="18">EMAIL: ${cleanEmail}</tspan><tspan x="30" dy="18">ORDER ID: ${shortKey}</tspan></text></g></svg>`;
+        // Generate the structural HTML text block for the security label
+        const watermarkHTML = `
+          LICENSED TO: ${cleanName}<br>
+          EMAIL: ${cleanEmail}<br>
+          ORDER ID: ${shortKey}
+        `;
+
+        // Inject two distinct floating badges (Left side & Right side of viewport)
+        const container = document.getElementById('floating-watermark-container');
         
-        // FIXED: Swapped problematic btoa() function with URI component encoding for robust rendering
-        const encodedSvg = encodeURIComponent(svgString);
-        document.getElementById('security-watermark').style.backgroundImage = `url("data:image/svg+xml;utf8,${encodedSvg}")`;
+        const leftBadge = document.createElement('div');
+        leftBadge.className = 'handshake-badge badge-left';
+        leftBadge.innerHTML = watermarkHTML;
+        
+        const rightBadge = document.createElement('div');
+        rightBadge.className = 'handshake-badge badge-right';
+        rightBadge.innerHTML = watermarkHTML;
+
+        container.appendChild(leftBadge);
+        container.appendChild(rightBadge);
         
       } else {
         const contentBlock = document.querySelector('main') || document.body;
