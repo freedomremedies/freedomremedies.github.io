@@ -80,7 +80,7 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><style>/* Compact & Refined Secure Link Message Box Styling */
+      }</script><style>/* Compact Secure Link Message Box Styling */
   #access-denied-screen {
     display: none;
     text-align: center;
@@ -97,25 +97,58 @@
   #access-denied-screen h2 { font-size: 18px; margin-top: 0; margin-bottom: 8px; font-weight: bold; }
   #access-denied-screen p { font-size: 14px; line-height: 1.5; color: #555555; margin: 0; }
 
-  /* UPDATED WATERMARK: Spans across the entire horizontal viewport plane */
-  #security-watermark {
+  /* Viewport canvas container holding the floating watermark elements */
+  #floating-watermark-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; 
-    z-index: 9999999;     
+    pointer-events: none; /* Allows user to click and scroll the ebook text beneath it */
+    z-index: 9999999;     /* Forces it to hover over absolutely everything */
     overflow: hidden;
-    background-repeat: repeat;
   }
 
-  /* AUTOMATIC ZOOM OUT: Scales content element layout container smoothly down by roughly 3 steps */
-  .ebook-zoomed-layout {
-    transform: scale(0.72);
-    transform-origin: top center;
-    width: 138% !important; /* Counteracts element box shrinkage caused by scaling factor downshifts */
-  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="security-watermark"></div><script>document.addEventListener("DOMContentLoaded", function() {
+  /* RESTORED: Straight horizontal security badges with heavy-bold red layout styling */
+  .handshake-badge {
+    position: absolute;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.15); 
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 900; 
+    letter-spacing: 0.8px;
+    line-height: 1.6;
+    color: #ff3131;   /* Vibrant Red */
+    opacity: 0.35;    /* 35% High-Contrast text density */
+    pointer-events: none;
+    white-space: nowrap;
+    transform: none; 
+    text-shadow: 0px 1px 1px rgba(255,255,255,0.8); 
+  }
+
+  /* Floating animation behaviors to dynamically shift positions smoothly */
+  .badge-left {
+    left: 10%;
+    top: 25%;
+    animation: floatLeft 16s ease-in-out infinite alternate;
+  }
+
+  .badge-right {
+    right: 10%;
+    top: 60%;
+    animation: floatRight 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatLeft {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(140px); }
+  }
+
+  @keyframes floatRight {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-160px); }
+  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname;
 
     // -------------------------------------------------------------------------
@@ -135,7 +168,7 @@
     ]; 
 
     // -------------------------------------------------------------------------
-    // ROUTE A: SECURE LOCKDOWN & STRIPED WATERMARK ROUTER (EBOOK VIEW)
+    // ROUTE A: SECURE LOCKDOWN & FLOATING BADGE ENGINE (EBOOK VIEW ONLY)
     // -------------------------------------------------------------------------
     if (ebookPages.some(path => currentPath.includes(path))) {
       const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
@@ -147,23 +180,29 @@
       const stripeKey   = urlParams.get('key');
 
       if (stripeName && stripeEmail && stripeKey && stripeKey.trim().startsWith("cs_")) {
-        // Enforce the modern browser downscaling zoom modifier profile
-        const mainContentBlock = document.querySelector('main') || document.body;
-        if (mainContentBlock) {
-          mainContentBlock.classList.add('ebook-zoomed-layout');
-        }
-
         const cleanName  = decodeURIComponent(stripeName).toUpperCase();
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
         const shortKey   = stripeKey.substring(0, 14) + "...";
 
-        const textLine = `LICENSED TO: ${cleanName}   |   EMAIL: ${cleanEmail}   |   ORDER AUTH KEY: ${shortKey}`;
+        // Structured multi-line horizontal text block strings
+        const watermarkHTML = `
+          LICENSED TO: ${cleanName}<br>
+          EMAIL: ${cleanEmail}<br>
+          ORDER ID: ${shortKey}
+        `;
+
+        const container = document.getElementById('floating-watermark-container');
         
-        // UPDATED DESIGN: Builds a massive, repeating grid canvas tiling strings flat across the page layout
-        const svgString = `<svg xmlns="http://w3.org" width="900" height="180" viewBox="0 0 900 180"><text x="20" y="50" font-family="Arial, sans-serif" font-size="11" font-weight="900" fill="#ff3131" opacity="0.22">${textLine}</text><text x="450" y="140" font-family="Arial, sans-serif" font-size="11" font-weight="900" fill="#ff3131" opacity="0.22">${textLine}</text></svg>`;
+        const leftBadge = document.createElement('div');
+        leftBadge.className = 'handshake-badge badge-left';
+        leftBadge.innerHTML = watermarkHTML;
         
-        const encodedSvg = encodeURIComponent(svgString);
-        document.getElementById('security-watermark').style.backgroundImage = `url("data:image/svg+xml;utf8,${encodedSvg}")`;
+        const rightBadge = document.createElement('div');
+        rightBadge.className = 'handshake-badge badge-right';
+        rightBadge.innerHTML = watermarkHTML;
+
+        container.appendChild(leftBadge);
+        container.appendChild(rightBadge);
       } else {
         const contentBlock = document.querySelector('main') || document.body;
         const errorHTML = document.getElementById('access-denied-screen');
@@ -197,7 +236,7 @@
         const pageLinks = document.querySelectorAll('a');
         pageLinks.forEach(link => {
           if (link.href.includes('/say-goodbye-protected-ebook-access-page/')) { 
-            link.href = 'https://freedomremedies.github.io/say-goodbye-protected-ebook-access-page/' + currentParams;
+            link.href = 'https://github.io' + currentParams;
           }
         });
       }
