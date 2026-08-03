@@ -119,11 +119,13 @@ h1.page__title {
       totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
 
       const urlParams = new URLSearchParams(window.location.search);
-      const stripeName  = urlParams.get('name');
-      const stripeEmail = urlParams.get('email');
-      const stripeKey   = urlParams.get('key');
+      // Checks both lower-case and Stripe's native upper-case parameters
+const stripeName  = urlParams.get('name')  || urlParams.get('NAME');
+const stripeEmail = urlParams.get('email') || urlParams.get('EMAIL');
+const stripeKey   = urlParams.get('key')   || urlParams.get('KEY');
 
-      if (stripeName && stripeEmail && stripeKey && stripeKey.trim().startsWith("cs_")) {
+
+      if (stripeName && stripeEmail && stripeKey && stripeKey.trim().toLowerCase().startsWith("cs_")) {
         const cleanName  = decodeURIComponent(stripeName).toUpperCase();
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
         const shortKey   = stripeKey.substring(0, 14) + "...";
