@@ -157,38 +157,180 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><script>document.addEventListener("DOMContentLoaded", function() {
+      }</script><style>/* Compact & Refined Secure Link Message Box Styling */
+  #access-denied-screen {
+    display: none;
+    text-align: center;
+    margin: 60px auto;
+    padding: 20px 25px;
+    max-width: 460px; 
+    font-family: Arial, sans-serif;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fafafa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  }
+
+  #access-denied-screen h2 { font-size: 18px; margin-top: 0; margin-bottom: 8px; font-weight: bold; }
+  #access-denied-screen p { font-size: 14px; line-height: 1.5; color: #555555; margin: 0; }
+
+  /* Viewport canvas container holding the floating watermark elements */
+  #floating-watermark-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Allows user to click and scroll the ebook text beneath it */
+    z-index: 9999999;     /* Forces it to hover over absolutely everything */
+    overflow: hidden;
+  }
+
+  /* Straight horizontal security badges with heavy-bold red layout styling */
+  .handshake-badge {
+    position: absolute;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.15); 
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 900; 
+    letter-spacing: 0.8px;
+    line-height: 1.6;
+    color: #ff3131;   /* Vibrant Red */
+    opacity: 0.35;    /* 35% High-Contrast text density */
+    pointer-events: none;
+    white-space: nowrap;
+    transform: none; 
+    text-shadow: 0px 1px 1px rgba(255,255,255,0.8); 
+  }
+
+  /* Floating animation behaviors to dynamically shift positions smoothly */
+  .badge-left {
+    left: 10%;
+    top: 25%;
+    animation: floatLeft 16s ease-in-out infinite alternate;
+  }
+
+  .badge-right {
+    right: 10%;
+    top: 60%;
+    animation: floatRight 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes floatLeft {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(140px); }
+  }
+
+  @keyframes floatRight {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-160px); }
+  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname.toLowerCase();
 
     // -------------------------------------------------------------------------
-    // 1. REGISTRY: LIST THE PAGES YOU WANT TO CLEAN UP
+    // 1. ARRANGEMENT: EXACT MATCHED DESTINATION REGISTRY
     // -------------------------------------------------------------------------
-    
-    // Pages where EVERYTHING is hidden (Website Name, Menus, Titles, Footers)
-    const totalWipeoutPages = [
-      '/say-goodbye-protected-ebook-access-page/',
-      '/say-goodbye-thank-you-page/'
+    const ebookPages = [
+      '/say-goodbye-protected-ebook-access-page/'
     ];
 
-    // Pages where ONLY Menus and Page Titles are hidden (Website Name Header STAYS)
-    const minimalHidePages = [
+    const thankYouPages = [
+      '/say-goodbye-thank-you-page/',
+      '/say-goodbye-thank-you-page'
+    ];
+
+    const cleanLayoutPages = [
       '/bye-bye-mosquitoes-about-page/',
       '/say-goodbye-to-cold-sores-forever-about-page/'
     ]; 
 
     // -------------------------------------------------------------------------
-    // 2. EXECUTION: APPLY THE LAYOUT HIDING RULES
+    // ROUTE A: SECURE LOCKDOWN & FLOATING BADGE ENGINE (EBOOK VIEW ONLY)
     // -------------------------------------------------------------------------
-    
-    // Group A: Hide absolutely everything for a full-screen app view
-    if (totalWipeoutPages.some(path => currentPath.includes(path))) {
-      const elementsToHide = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
-      elementsToHide.forEach(el => el.style.setProperty('display', 'none', 'important'));
+    if (ebookPages.some(path => currentPath.includes(path))) {
+      // Complete removal: Wipes website name, menu bars, titles, and global footers
+      const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
+      totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      // Case-Insensitive Grabber: Checks both lower-case and Stripe's upper-case tags
+      const stripeName  = urlParams.get('name')  || urlParams.get('NAME');
+      const stripeEmail = urlParams.get('email') || urlParams.get('EMAIL');
+      const stripeKey   = urlParams.get('key')   || urlParams.get('KEY');
+
+      if (stripeName && stripeEmail && stripeKey && stripeKey.trim().toLowerCase().startsWith("cs_")) {
+        const cleanName  = decodeURIComponent(stripeName).toUpperCase();
+        const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
+        const shortKey   = (stripeKey && stripeKey.length > 14) ? stripeKey.substring(0, 14) + "..." : stripeKey;
+
+        // Structured multi-line horizontal text block strings
+        const watermarkHTML = `
+          LICENSED TO: ${cleanName}<br>
+          EMAIL: ${cleanEmail}<br>
+          ORDER ID: ${shortKey}
+        `;
+
+        const container = document.getElementById('floating-watermark-container');
+        
+        const leftBadge = document.createElement('div');
+        leftBadge.className = 'handshake-badge badge-left';
+        leftBadge.innerHTML = watermarkHTML;
+        
+        const rightBadge = document.createElement('div');
+        rightBadge.className = 'handshake-badge badge-right';
+        rightBadge.innerHTML = watermarkHTML;
+
+        container.appendChild(leftBadge);
+        container.appendChild(rightBadge);
+      } else {
+        // Unauthorized visitor: Empty the page content frame and load the lock box
+        const contentBlock = document.querySelector('main') || document.body;
+        const errorHTML = document.getElementById('access-denied-screen');
+        if (contentBlock && errorHTML) {
+          errorHTML.style.display = 'block';
+          contentBlock.innerHTML = ''; 
+          contentBlock.appendChild(errorHTML);
+        }
+      }
+
+      // Behavioral Lockdowns
+      document.addEventListener('contextmenu', event => event.preventDefault());
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'p', 's', 'u'].includes(e.key.toLowerCase())) {
+          e.preventDefault();
+          alert("Content copy and offline printing are restricted on this secure edition.");
+        }
+        if (e.key === 'F12') e.preventDefault();
+      });
     }
 
-    // Group B: Hide only the menus and article titles (Website name header remains active)
-    if (minimalHidePages.some(path => currentPath.includes(path))) {
-      const elementsToHide = document.querySelectorAll('nav, .nav, #menu, .menu, h1, .post-title, .post__title, .page-title, .page__title');
-      elementsToHide.forEach(el => el.style.setProperty('display', 'none', 'important'));
+    // -------------------------------------------------------------------------
+    // ROUTE B: SPECIFIC THANK YOU PATH (CLEANS ALL HEADER, MENU & BRAND LOGOS)
+    // -------------------------------------------------------------------------
+    if (thankYouPages.some(path => currentPath.includes(path))) {
+      // Wipes headers, footers, website title names, menus, and headings completely
+      const thankYouWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, h1, .post-title, .post__title, .page-title, .page__title, footer, .footer');
+      thankYouWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
+      const currentParams = window.location.search; 
+      if (currentParams) {
+        const pageLinks = document.querySelectorAll('a');
+        pageLinks.forEach(link => {
+          if (link.href.includes('say-goodbye-protected-ebook-access-page')) { 
+            link.href = 'https://github.io' + currentParams;
+          }
+        });
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // ROUTE C: GENERIC SELECTIVE HIDING FOR MARKETING SUB-PAGES
+    // -------------------------------------------------------------------------
+    if (cleanLayoutPages.some(path => currentPath.includes(path))) {
+      // Menu bar and page titles are invisible, but website name header stays active
+      const simpleHideElements = document.querySelectorAll('nav, .nav, #menu, .menu, h1, .post-title, .post__title, .page-title, .page__title');
+      simpleHideElements.forEach(el => el.style.setProperty('display', 'none', 'important'));
     }
   });</script></body></html>
