@@ -216,49 +216,48 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><script>document.addEventListener("DOMContentLoaded", function() {
+      }</script><style>/* Compact & Refined Security Lock Container Box Layout */
+  #access-denied-screen {
+    display: none;
+    text-align: center;
+    margin: 100px auto;
+    padding: 25px 30px;
+    max-width: 460px; 
+    font-family: Arial, sans-serif;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fafafa;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  }
+
+  #access-denied-screen h2 { font-size: 18px; margin-top: 0; margin-bottom: 8px; font-weight: bold; }
+  #access-denied-screen p { font-size: 14px; line-height: 1.5; color: #555555; margin: 0; }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please wait to be granted access...</p></div><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname.toLowerCase();
 
-    // Marketing Page Tracking Array Rules
+    // Registry Setup Rules
     const cleanLayoutPages = [
       '/bye-bye-mosquitoes-about-page/',
       '/say-goodbye-to-cold-sores-forever-about-page/'
     ]; 
 
     // -------------------------------------------------------------------------
-    // ROUTE A: CLEAN EBOOK LAYOUT (COMPLETELY UNINVOLVED IN SECURITY)
+    // ROUTE A: PROTECTED EBOOK PAGE (TAB SESSION AUTHENTICATION FILTER)
     // -------------------------------------------------------------------------
     if (currentPath.includes('say-goodbye-protected-ebook-access-page')) {
-      // Hides your theme's native headers, menus, titles, and footers for a clean app view.
-      // Absolutely NO security locks, NO watermarks, and NO redirect timers happen here!
+      // Complete layout removal for full-screen reading state
       const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
       totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
-    }
 
-    // -------------------------------------------------------------------------
-    // ROUTE B: SPECIFIC THANK YOU PATH (HOLDS ONLY REDIRECT SECURITY)
-    // -------------------------------------------------------------------------
-    if (currentPath.includes('say-goodbye-thank-you-page')) {
-      const thankYouWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, h1, .post-title, .post__title, .page-title, .page__title, footer, .footer');
-      thankYouWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
+      // Scan the temporary browser tab window state for the unique click handshake token
+      const isTabAuthorized = sessionStorage.getItem('valid_button_click_handshake');
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const stripeKey = urlParams.get('key') || urlParams.get('KEY');
-
-      // PROTECTION BARRIER: Check if the user arrived with a valid checkout token string
-      if (stripeKey && stripeKey.trim().toLowerCase().startsWith("cs_")) {
-        // Legitimate Buyer: Forward their parameters seamlessly straight to the clean ebook link button
-        const currentParams = window.location.search; 
-        if (currentParams) {
-          const pageLinks = document.querySelectorAll('a');
-          pageLinks.forEach(link => {
-            if (link.href.includes('say-goodbye-protected-ebook-access-page')) { 
-              link.href = 'https://github.io' + currentParams;
-            }
-          });
-        }
+      if (isTabAuthorized === 'true') {
+        // Legitimate Buyer: Verified button click origin match found. Clear URL and show ebook.
+        const cleanURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({ path: cleanURL }, '', cleanURL);
+        return; // Halt logic to bypass lockouts completely
       } else {
-        // Shared Link Recipient / Intruder: Hide the text, display your waiting message, and redirect
+        // Intruder/Shared Link Recipient: Tab token missing. Hide screen, run message, and boot.
         const contentBlock = document.querySelector('main') || document.body;
         const errorHTML = document.getElementById('access-denied-screen');
         if (contentBlock && errorHTML) {
@@ -266,12 +265,41 @@
           contentBlock.innerHTML = ''; 
           contentBlock.appendChild(errorHTML);
           
-          // Wait exactly 3 seconds and boot them out to your homepage root
           setTimeout(function() {
             window.location.href = 'https://github.io';
           }, 3000);
         }
       }
+    }
+
+    // -------------------------------------------------------------------------
+    // ROUTE B: THANK YOU PAGE (EXPIRATION TIMER & INTERCEPT ENGINE)
+    // -------------------------------------------------------------------------
+    if (currentPath.includes('say-goodbye-thank-you-page')) {
+      const thankYouWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, h1, .post-title, .post__title, .page-title, .page__title, footer, .footer');
+      thankYouWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
+      // Check if this user has already clicked the access link button previously
+      const isPageExpired = localStorage.getItem('thank_you_page_expired_token');
+
+      if (isPageExpired === 'true') {
+        // Expired Session: Force boot them out immediately to your root homepage layout
+        window.location.href = 'https://github.io';
+        return;
+      }
+
+      // Add a live click event tracker to your button element container
+      const pageLinks = document.querySelectorAll('a');
+      pageLinks.forEach(link => {
+        if (link.href.includes('say-goodbye-protected-ebook-access-page') || link.textContent.toLowerCase().includes('access')) {
+          link.addEventListener('click', function() {
+            // 1. Authorize the current active browser tab session wrapper
+            sessionStorage.setItem('valid_button_click_handshake', 'true');
+            // 2. Kill the Thank You page parameter indefinitely across this machine
+            localStorage.setItem('thank_you_page_expired_token', 'true');
+          });
+        }
+      });
     }
 
     // -------------------------------------------------------------------------
