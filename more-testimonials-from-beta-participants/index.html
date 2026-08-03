@@ -273,7 +273,7 @@ const stripeKey   = urlParams.get('key')   || urlParams.get('KEY');
       if (stripeName && stripeEmail && stripeKey && stripeKey.trim().toLowerCase().startsWith("cs_")) {
         const cleanName  = decodeURIComponent(stripeName).toUpperCase();
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
-        const shortKey   = stripeKey.substring(0, 14) + "...";
+        const shortKey   = (stripeKey && stripeKey.length > 14) ? stripeKey.substring(0, 14) + "..." : stripeKey;
 
         // Structured multi-line horizontal text block strings
         const watermarkHTML = `
