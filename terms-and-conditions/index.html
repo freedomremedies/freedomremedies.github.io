@@ -85,7 +85,7 @@
   #access-denied-screen {
     display: none;
     text-align: center;
-    margin: 60px auto;
+    margin: 100px auto;
     padding: 25px 30px;
     max-width: 460px; 
     font-family: Arial, sans-serif;
@@ -95,123 +95,65 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.03);
   }
 
-  /* High-Contrast Bold Headline */
-  #access-denied-screen h2 {
-    font-size: 18px; 
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-weight: bold;
-  }
-
-  /* Soft modern waiting notification text string */
-  #access-denied-screen p {
-    font-size: 14px; 
-    line-height: 1.5;
-    color: #555555; 
-    margin: 0;
-  }
+  #access-denied-screen h2 { font-size: 18px; margin-top: 0; margin-bottom: 8px; font-weight: bold; }
+  #access-denied-screen p { font-size: 14px; line-height: 1.5; color: #555555; margin: 0; }
 
   /* Viewport canvas container holding the floating watermark elements */
   #floating-watermark-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none; 
-    z-index: 9999999;     
-    overflow: hidden;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none; z-index: 9999999; overflow: hidden;
   }
 
   /* Straight horizontal security badges with heavy-bold red layout styling */
   .handshake-badge {
-    position: absolute;
-    padding: 14px 20px;
-    background: rgba(255, 255, 255, 0.15); 
-    font-family: Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 900; 
-    letter-spacing: 0.8px;
-    line-height: 1.6;
-    color: #ff3131;   
-    opacity: 0.35;    
-    pointer-events: none;
-    white-space: nowrap;
-    transform: none; 
+    position: absolute; padding: 14px 20px; background: rgba(255, 255, 255, 0.15); 
+    font-family: Arial, sans-serif; font-size: 13px; font-weight: 900; 
+    letter-spacing: 0.8px; line-height: 1.6; color: #ff3131; opacity: 0.35;    
+    pointer-events: none; white-space: nowrap; transform: none; 
     text-shadow: 0px 1px 1px rgba(255,255,255,0.8); 
   }
 
-  /* Floating animation behaviors to dynamically shift positions smoothly */
-  .badge-left {
-    left: 10%;
-    top: 25%;
-    animation: floatLeft 16s ease-in-out infinite alternate;
-  }
-
-  .badge-right {
-    right: 10%;
-    top: 60%;
-    animation: floatRight 20s ease-in-out infinite alternate;
-  }
-
-  @keyframes floatLeft {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(140px); }
-  }
-
-  @keyframes floatRight {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-160px); }
-  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please wait to be granted access...</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
+  .badge-left { left: 10%; top: 25%; animation: floatLeft 16s ease-in-out infinite alternate; }
+  .badge-right { right: 10%; top: 60%; animation: floatRight 20s ease-in-out infinite alternate; }
+  @keyframes floatLeft { 0% { transform: translateY(0px); } 100% { transform: translateY(140px); } }
+  @keyframes floatRight { 0% { transform: translateY(0px); } 100% { transform: translateY(-160px); } }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please wait to be granted access...</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname.toLowerCase();
 
-    // -------------------------------------------------------------------------
-    // 1. ARRANGEMENT: EXACT MATCHED DESTINATION REGISTRY
-    // -------------------------------------------------------------------------
-    const ebookPages = [
-      '/say-goodbye-protected-ebook-access-page/'
-    ];
-
-    const thankYouPages = [
-      '/say-goodbye-thank-you-page/',
-      '/say-goodbye-thank-you-page'
-    ];
-
+    // Marketing Page Tracking Array Rules
     const cleanLayoutPages = [
       '/bye-bye-mosquitoes-about-page/',
       '/say-goodbye-to-cold-sores-forever-about-page/'
     ]; 
 
     // -------------------------------------------------------------------------
-    // ROUTE A: DEVICE-VAULT SECURE ACCESS LOCK (EBOOK VIEW ONLY)
+    // ROUTE A: SECURE ACCESS CONTROL (TARGETS SECURE PROTECTED EBOOK PAGE)
     // -------------------------------------------------------------------------
-    if (ebookPages.some(path => currentPath.includes(path))) {
+    if (currentPath.includes('say-goodbye-protected-ebook-access-page')) {
+      // Instantly wipe standard headers, footers, brand titles, and native page headings
+      const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
+      totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
       const urlParams = new URLSearchParams(window.location.search);
-      
       const stripeName  = urlParams.get('name')  || urlParams.get('NAME');
       const stripeEmail = urlParams.get('email') || urlParams.get('EMAIL');
       const stripeKey   = urlParams.get('key')   || urlParams.get('KEY');
 
-      // DEVICE VAULT CHECK: Check if this browser already holds an access token in its memory
+      // Check if this specific browser already has an active access badge stored inside its memory
       let isDeviceAuthorized = localStorage.getItem('ebook_access_granted_vault');
 
       if (stripeName && stripeEmail && stripeKey && stripeKey.trim().toLowerCase().startsWith("cs_")) {
-        // Authenticated Buyer Arrival: Save their billing credentials to local storage vault
+        // First-Time Buyer Arrival: Lock their credentials directly to this device session memory
         const buyerIdentity = JSON.stringify({ name: stripeName, email: stripeEmail, key: stripeKey });
         localStorage.setItem('ebook_access_granted_vault', buyerIdentity);
         isDeviceAuthorized = buyerIdentity;
 
-        // CLEAN LINK AGENT: Instantly clean up the browser bar.
+        // URL CLEANER: Clean parameters right out of the URL bar immediately so they cannot be copied or shared
         const cleanURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
         window.history.replaceState({ path: cleanURL }, '', cleanURL);
       }
 
-      // EVALUATE DEPLOYMENT ACCESS
+      // EVALUATE DEPLOYMENT REFRESH AND VISITATION ROLES
       if (isDeviceAuthorized) {
-        // OPTIMIZED REFRESH: Instantly run header/menu removal and paint watermarks with 0 layout blinking
-        const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
-        totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
-
         try {
           const storedData = JSON.parse(isDeviceAuthorized);
           const cleanName  = decodeURIComponent(storedData.name).toUpperCase();
@@ -233,7 +175,7 @@
           container.appendChild(leftBadge);
           container.appendChild(rightBadge);
           
-          // Complete verification bypass to keep refreshes seamless
+          // Complete verification bypass to keep purchases and refreshes completely unblocked
           return;
           
         } catch(e) {
@@ -243,10 +185,7 @@
         }
       }
 
-      // Unverified Intruder / Shared Link User: Wipe content and execute redirect loop
-      const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
-      totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
-
+      // Shared Link User / Unverified Intruder: Freeze screen and boot to homepage
       const contentBlock = document.querySelector('main') || document.body;
       const errorHTML = document.getElementById('access-denied-screen');
       if (contentBlock && errorHTML) {
@@ -254,7 +193,7 @@
         contentBlock.innerHTML = ''; 
         contentBlock.appendChild(errorHTML);
         
-        // REDIRECT TIMER: Waits exactly 3 seconds before sending shared link recipients to the homepage
+        // REDIRECT TIMER: Waits exactly 3 seconds before kicking unverified users out to the homepage
         setTimeout(function() {
           window.location.href = 'https://github.io';
         }, 3000);
@@ -274,7 +213,7 @@
     // -------------------------------------------------------------------------
     // ROUTE B: SPECIFIC THANK YOU PATH (CLEANS ALL HEADER, MENU & BRAND LOGOS)
     // -------------------------------------------------------------------------
-    if (thankYouPages.some(path => currentPath.includes(path))) {
+    if (currentPath.includes('say-goodbye-thank-you-page')) {
       const thankYouWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, h1, .post-title, .post__title, .page-title, .page__title, footer, .footer');
       thankYouWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
 
