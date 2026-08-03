@@ -173,8 +173,8 @@
   #access-denied-screen {
     display: none;
     text-align: center;
-    margin: 100px auto;
-    padding: 35px 25px;
+    margin: 60px auto;
+    padding: 25px 30px;
     max-width: 460px; 
     font-family: Arial, sans-serif;
     border: 1px solid #e0e0e0;
@@ -183,12 +183,19 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.03);
   }
 
-  /* Soft modern typography with an active waiting indicator layout appearance */
+  /* High-Contrast Bold Headline */
+  #access-denied-screen h2 {
+    font-size: 18px; 
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  /* Soft modern waiting notification text string */
   #access-denied-screen p {
-    font-size: 15px; 
-    line-height: 1.6;
-    color: #334155; 
-    font-weight: 500;
+    font-size: 14px; 
+    line-height: 1.5;
+    color: #555555; 
     margin: 0;
   }
 
@@ -199,8 +206,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* Allows user to click and scroll the ebook text beneath it */
-    z-index: 9999999;     /* Forces it to hover over absolutely everything */
+    pointer-events: none; 
+    z-index: 9999999;     
     overflow: hidden;
   }
 
@@ -214,8 +221,8 @@
     font-weight: 900; 
     letter-spacing: 0.8px;
     line-height: 1.6;
-    color: #ff3131;   /* Vibrant Red */
-    opacity: 0.35;    /* 35% High-Contrast text density */
+    color: #ff3131;   
+    opacity: 0.35;    
     pointer-events: none;
     white-space: nowrap;
     transform: none; 
@@ -243,7 +250,7 @@
   @keyframes floatRight {
     0% { transform: translateY(0px); }
     100% { transform: translateY(-160px); }
-  }</style><div id="access-denied-screen"><p>Please wait to be granted access...</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
+  }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please wait to be granted access...</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname.toLowerCase();
 
     // -------------------------------------------------------------------------
@@ -267,10 +274,6 @@
     // ROUTE A: DEVICE-VAULT SECURE ACCESS LOCK (EBOOK VIEW ONLY)
     // -------------------------------------------------------------------------
     if (ebookPages.some(path => currentPath.includes(path))) {
-      // Complete layout removal for full-screen reading state
-      const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
-      totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
-
       const urlParams = new URLSearchParams(window.location.search);
       
       const stripeName  = urlParams.get('name')  || urlParams.get('NAME');
@@ -281,6 +284,7 @@
       let isDeviceAuthorized = localStorage.getItem('ebook_access_granted_vault');
 
       if (stripeName && stripeEmail && stripeKey && stripeKey.trim().toLowerCase().startsWith("cs_")) {
+        // Authenticated Buyer Arrival: Save their billing credentials to local storage vault
         const buyerIdentity = JSON.stringify({ name: stripeName, email: stripeEmail, key: stripeKey });
         localStorage.setItem('ebook_access_granted_vault', buyerIdentity);
         isDeviceAuthorized = buyerIdentity;
@@ -292,6 +296,10 @@
 
       // EVALUATE DEPLOYMENT ACCESS
       if (isDeviceAuthorized) {
+        // OPTIMIZED REFRESH: Instantly run header/menu removal and paint watermarks with 0 layout blinking
+        const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
+        totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
         try {
           const storedData = JSON.parse(isDeviceAuthorized);
           const cleanName  = decodeURIComponent(storedData.name).toUpperCase();
@@ -312,24 +320,32 @@
 
           container.appendChild(leftBadge);
           container.appendChild(rightBadge);
+          
+          // Complete verification bypass to keep refreshes seamless
+          return;
+          
         } catch(e) {
           localStorage.removeItem('ebook_access_granted_vault');
           window.location.reload();
+          return;
         }
-      } else {
-        // Unverified Intruder / Shared Link User: Show the message briefly, then redirect
-        const contentBlock = document.querySelector('main') || document.body;
-        const errorHTML = document.getElementById('access-denied-screen');
-        if (contentBlock && errorHTML) {
-          errorHTML.style.display = 'block';
-          contentBlock.innerHTML = ''; 
-          contentBlock.appendChild(errorHTML);
-          
-          // NEW REDIRECT TIMER: Waits exactly 3000 milliseconds (3 seconds) and then forwards to your homepage root
-          setTimeout(function() {
-            window.location.href = 'https://github.io';
-          }, 3000);
-        }
+      }
+
+      // Unverified Intruder / Shared Link User: Wipe content and execute redirect loop
+      const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
+      totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
+
+      const contentBlock = document.querySelector('main') || document.body;
+      const errorHTML = document.getElementById('access-denied-screen');
+      if (contentBlock && errorHTML) {
+        errorHTML.style.display = 'block';
+        contentBlock.innerHTML = ''; 
+        contentBlock.appendChild(errorHTML);
+        
+        // REDIRECT TIMER: Waits exactly 3 seconds before sending shared link recipients to the homepage
+        setTimeout(function() {
+          window.location.href = 'https://github.io';
+        }, 3000);
       }
 
       // Behavioral Lockdowns
