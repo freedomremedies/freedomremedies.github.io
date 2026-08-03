@@ -32,7 +32,7 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><style>/* Compact & Refined Secure Link Message Box Styling */
+      }</script><style>/* Compact & Refined Security Lock Container Box Layout */
   #access-denied-screen {
     display: none;
     text-align: center;
@@ -47,136 +47,75 @@
   }
 
   #access-denied-screen h2 { font-size: 18px; margin-top: 0; margin-bottom: 8px; font-weight: bold; }
-  #access-denied-screen p { font-size: 14px; line-height: 1.5; color: #555555; margin: 0; }
-
-  /* Viewport canvas container holding the floating watermark elements */
-  #floating-watermark-container {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    pointer-events: none; z-index: 9999999; overflow: hidden;
-  }
-
-  /* Straight horizontal security badges with heavy-bold red layout styling */
-  .handshake-badge {
-    position: absolute; padding: 14px 20px; background: rgba(255, 255, 255, 0.15); 
-    font-family: Arial, sans-serif; font-size: 13px; font-weight: 900; 
-    letter-spacing: 0.8px; line-height: 1.6; color: #ff3131; opacity: 0.35;    
-    pointer-events: none; white-space: nowrap; transform: none; 
-    text-shadow: 0px 1px 1px rgba(255,255,255,0.8); 
-  }
-
-  .badge-left { left: 10%; top: 25%; animation: floatLeft 16s ease-in-out infinite alternate; }
-  .badge-right { right: 10%; top: 60%; animation: floatRight 20s ease-in-out infinite alternate; }
-  @keyframes floatLeft { 0% { transform: translateY(0px); } 100% { transform: translateY(140px); } }
-  @keyframes floatRight { 0% { transform: translateY(0px); } 100% { transform: translateY(-160px); } }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please wait to be granted access...</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
+  #access-denied-screen p { font-size: 14px; line-height: 1.5; color: #555555; margin: 0; }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please wait to be granted access...</p></div><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname.toLowerCase();
 
-    // Marketing Page Tracking Array Rules
+    // Registry Setup Rules
     const cleanLayoutPages = [
       '/bye-bye-mosquitoes-about-page/',
       '/say-goodbye-to-cold-sores-forever-about-page/'
     ]; 
 
     // -------------------------------------------------------------------------
-    // ROUTE A: SECURE ACCESS CONTROL (TARGETS SECURE PROTECTED EBOOK PAGE)
+    // ROUTE A: PROTECTED EBOOK PAGE (TAB SESSION AUTHENTICATION FILTER)
     // -------------------------------------------------------------------------
     if (currentPath.includes('say-goodbye-protected-ebook-access-page')) {
-      // Instantly wipe standard headers, footers, brand titles, and native page headings
+      // Complete layout removal for full-screen reading state
       const totalWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, footer, .footer, h1, .post-title, .post__title, .page-title, .page__title');
       totalWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
 
-      const urlParams = new URLSearchParams(window.location.search);
-      const stripeName  = urlParams.get('name')  || urlParams.get('NAME');
-      const stripeEmail = urlParams.get('email') || urlParams.get('EMAIL');
-      const stripeKey   = urlParams.get('key')   || urlParams.get('KEY');
+      // Scan the temporary browser tab window state for the unique click handshake token
+      const isTabAuthorized = sessionStorage.getItem('valid_button_click_handshake');
 
-      // Check if this specific browser already has an active access badge stored inside its memory
-      let isDeviceAuthorized = localStorage.getItem('ebook_access_granted_vault');
-
-      if (stripeName && stripeEmail && stripeKey && stripeKey.trim().toLowerCase().startsWith("cs_")) {
-        // First-Time Buyer Arrival: Lock their credentials directly to this device session memory
-        const buyerIdentity = JSON.stringify({ name: stripeName, email: stripeEmail, key: stripeKey });
-        localStorage.setItem('ebook_access_granted_vault', buyerIdentity);
-        isDeviceAuthorized = buyerIdentity;
-
-        // URL CLEANER: Clean parameters right out of the URL bar immediately so they cannot be copied or shared
+      if (isTabAuthorized === 'true') {
+        // Legitimate Buyer: Verified button click origin match found. Clear URL and show ebook.
         const cleanURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
         window.history.replaceState({ path: cleanURL }, '', cleanURL);
-      }
-
-      // EVALUATE DEPLOYMENT REFRESH AND VISITATION ROLES
-      if (isDeviceAuthorized) {
-        try {
-          const storedData = JSON.parse(isDeviceAuthorized);
-          const cleanName  = decodeURIComponent(storedData.name).toUpperCase();
-          const cleanEmail = decodeURIComponent(storedData.email).toLowerCase();
-          const rawKey     = storedData.key;
-          const shortKey   = (rawKey && rawKey.length > 14) ? rawKey.substring(0, 14) + "..." : rawKey;
-
-          const watermarkHTML = `LICENSED TO: ${cleanName}<br>EMAIL: ${cleanEmail}<br>ORDER ID: ${shortKey}`;
-          const container = document.getElementById('floating-watermark-container');
+        return; // Halt logic to bypass lockouts completely
+      } else {
+        // Intruder/Shared Link Recipient: Tab token missing. Hide screen, run message, and boot.
+        const contentBlock = document.querySelector('main') || document.body;
+        const errorHTML = document.getElementById('access-denied-screen');
+        if (contentBlock && errorHTML) {
+          errorHTML.style.display = 'block';
+          contentBlock.innerHTML = ''; 
+          contentBlock.appendChild(errorHTML);
           
-          const leftBadge = document.createElement('div');
-          leftBadge.className = 'handshake-badge badge-left';
-          leftBadge.innerHTML = watermarkHTML;
-          
-          const rightBadge = document.createElement('div');
-          rightBadge.className = 'handshake-badge badge-right';
-          rightBadge.innerHTML = watermarkHTML;
-
-          container.appendChild(leftBadge);
-          container.appendChild(rightBadge);
-          
-          // Complete verification bypass to keep purchases and refreshes completely unblocked
-          return;
-          
-        } catch(e) {
-          localStorage.removeItem('ebook_access_granted_vault');
-          window.location.reload();
-          return;
+          setTimeout(function() {
+            window.location.href = 'https://github.io';
+          }, 3000);
         }
       }
-
-      // Shared Link User / Unverified Intruder: Freeze screen and boot to homepage
-      const contentBlock = document.querySelector('main') || document.body;
-      const errorHTML = document.getElementById('access-denied-screen');
-      if (contentBlock && errorHTML) {
-        errorHTML.style.display = 'block';
-        contentBlock.innerHTML = ''; 
-        contentBlock.appendChild(errorHTML);
-        
-        // REDIRECT TIMER: Waits exactly 3 seconds before kicking unverified users out to the homepage
-        setTimeout(function() {
-          window.location.href = 'https://github.io';
-        }, 3000);
-      }
-
-      // Behavioral Lockdowns
-      document.addEventListener('contextmenu', event => event.preventDefault());
-      document.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && ['c', 'v', 'p', 's', 'u'].includes(e.key.toLowerCase())) {
-          e.preventDefault();
-          alert("Content copy and offline printing are restricted on this secure edition.");
-        }
-        if (e.key === 'F12') e.preventDefault();
-      });
     }
 
     // -------------------------------------------------------------------------
-    // ROUTE B: SPECIFIC THANK YOU PATH (CLEANS ALL HEADER, MENU & BRAND LOGOS)
+    // ROUTE B: THANK YOU PAGE (EXPIRATION TIMER & INTERCEPT ENGINE)
     // -------------------------------------------------------------------------
     if (currentPath.includes('say-goodbye-thank-you-page')) {
       const thankYouWipeout = document.querySelectorAll('#header, header, .header, #navbar, .navbar, nav, .nav, #menu, .menu, .logo, .site-logo, .site-title, h1, .post-title, .post__title, .page-title, .page__title, footer, .footer');
       thankYouWipeout.forEach(el => el.style.setProperty('display', 'none', 'important'));
 
-      const currentParams = window.location.search; 
-      if (currentParams) {
-        const pageLinks = document.querySelectorAll('a');
-        pageLinks.forEach(link => {
-          if (link.href.includes('say-goodbye-protected-ebook-access-page')) { 
-            link.href = 'https://github.iosay-goodbye-protected-ebook-access-page/' + currentParams;
-          }
-        });
+      // Check if this user has already clicked the access link button previously
+      const isPageExpired = localStorage.getItem('thank_you_page_expired_token');
+
+      if (isPageExpired === 'true') {
+        // Expired Session: Force boot them out immediately to your root homepage layout
+        window.location.href = 'https://github.io';
+        return;
       }
+
+      // Add a live click event tracker to your button element container
+      const pageLinks = document.querySelectorAll('a');
+      pageLinks.forEach(link => {
+        if (link.href.includes('say-goodbye-protected-ebook-access-page') || link.textContent.toLowerCase().includes('access')) {
+          link.addEventListener('click', function() {
+            // 1. Authorize the current active browser tab session wrapper
+            sessionStorage.setItem('valid_button_click_handshake', 'true');
+            // 2. Kill the Thank You page parameter indefinitely across this machine
+            localStorage.setItem('thank_you_page_expired_token', 'true');
+          });
+        }
+      });
     }
 
     // -------------------------------------------------------------------------
