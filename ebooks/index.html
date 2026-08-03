@@ -430,7 +430,7 @@
     0% { transform: translateY(0px); }
     100% { transform: translateY(-160px); }
   }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Link Required</h2><p>Please access this unique secure link provided in your purchase receipt.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
-    const currentPath = window.location.pathname;
+    const currentPath = window.location.pathname.toLowerCase();
 
     // -------------------------------------------------------------------------
     // 1. ARRANGEMENT: EXACT MATCHED DESTINATION REGISTRY
@@ -518,7 +518,7 @@ const stripeKey   = urlParams.get('key')   || urlParams.get('KEY');
       if (currentParams) {
         const pageLinks = document.querySelectorAll('a');
         pageLinks.forEach(link => {
-          if (link.href.includes('/say-goodbye-protected-ebook-access-page/')) { 
+          if (link.href.includes('say-goodbye-protected-ebook-access-page')) { 
             link.href = 'https://freedomremedies.github.io/say-goodbye-protected-ebook-access-page/' + currentParams;
           }
         });
