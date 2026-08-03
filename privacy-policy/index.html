@@ -105,47 +105,46 @@
     overflow: hidden;
   }
 
-  /* Universal styling for the enterprise floating badges */
+  /* Redefined straight horizontal security badges */
   .handshake-badge {
     position: absolute;
-    padding: 12px 18px;
-    background: rgba(240, 240, 240, 0.75); /* Faint frosted-glass backup backdrop */
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 6px;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.15); /* Ultra-faint backdrop boundary */
     font-family: Arial, sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
-    line-height: 1.5;
-    color: rgba(0, 0, 0, 0.14); /* Crisp, darker opacity level */
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    color: rgba(211, 47, 47, 0.16); /* Professional Security Red at 16% opacity */
     pointer-events: none;
     white-space: nowrap;
-    transform: rotate(-12deg);  /* Slight rotation mimicking a secure document stamp */
+    transform: none; /* Removed the rotation completely to keep it straight */
   }
 
-  /* Floating animation behaviors to dynamically shift positions */
+  /* Floating animation behaviors to dynamically shift positions smoothly */
   .badge-left {
-    left: 8%;
+    left: 10%;
     top: 25%;
     animation: floatLeft 16s ease-in-out infinite alternate;
   }
 
   .badge-right {
-    right: 8%;
+    right: 10%;
     top: 60%;
     animation: floatRight 20s ease-in-out infinite alternate;
   }
 
   @keyframes floatLeft {
-    0% { transform: translateY(0px) rotate(-12deg); }
-    100% { transform: translateY(120px) rotate(-8deg); }
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(140px); }
   }
 
   @keyframes floatRight {
-    0% { transform: translateY(0px) rotate(-12deg); }
-    100% { transform: translateY(-140px) rotate(-15deg); }
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-160px); }
   }</style><div id="access-denied-screen"><h2 style="color: #d32f2f;">🔒 Secure Order Link Required</h2><p>Please access this digital edition via the dynamic redirect link provided instantly upon your Stripe purchase completion.</p></div><div id="floating-watermark-container"></div><script>document.addEventListener("DOMContentLoaded", function() {
     // -------------------------------------------------------------------------
-    // CHANGE THIS TO YOUR EXACT EBOOK URL SLUG
+    // HARDCODED TESTING PATHWAY
     // -------------------------------------------------------------------------
     const protectedPagePath = '/protected-ebook-test-page/'; 
 
@@ -161,14 +160,13 @@
         const cleanEmail = decodeURIComponent(stripeEmail).toLowerCase();
         const shortKey   = stripeKey.substring(0, 14) + "...";
 
-        // Generate the structural HTML text block for the security label
+        // Rendered as clean, readable horizontal text rows
         const watermarkHTML = `
           LICENSED TO: ${cleanName}<br>
           EMAIL: ${cleanEmail}<br>
           ORDER ID: ${shortKey}
         `;
 
-        // Inject two distinct floating badges (Left side & Right side of viewport)
         const container = document.getElementById('floating-watermark-container');
         
         const leftBadge = document.createElement('div');
