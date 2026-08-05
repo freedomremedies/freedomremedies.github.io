@@ -182,7 +182,24 @@
                   this.classList.add('is-loaded');
                }, false);
          }
-      }</script><script>document.addEventListener("DOMContentLoaded", function() {
+      }</script><style>/* Subtle elevation card change on hover to match FAQ items */
+#bible-verse-section div:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05) !important;
+    border-color: #cbd5e1 !important;
+    transition: all 0.25s ease;
+}
+/* Safety resets to override theme lines */
+#bible-verse-section, 
+#bible-verse-section * {
+    text-decoration: none !important;
+}
+#bible-verse-section *:before,
+#bible-verse-section *:after {
+    display: none !important;
+    content: "" !important;
+    background: none !important;
+    border: none !important;
+}</style><script>document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname.toLowerCase();
 
     // -------------------------------------------------------------------------
