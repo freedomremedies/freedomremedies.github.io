@@ -3,7 +3,7 @@
     <title>Freedom Remedies</title>
     <link href="https://freedomremedies.com/feed.xml" rel="self" />
     <link href="https://freedomremedies.com" />
-    <updated>2026-08-05T21:41:10-04:00</updated>
+    <updated>2026-08-05T21:41:59-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
@@ -19,7 +19,7 @@
             <category term="Recipes"/>
             <category term="Articles"/>
 
-        <updated>2026-06-12T22:50:44-04:00</updated>
+        <updated>2026-08-05T21:41:59-04:00</updated>
             <summary type="html">
                 <![CDATA[
                     The Golden Latte (Two Ways) /* Base typography matching your system design */ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",&hellip;
@@ -171,6 +171,43 @@
 </body>
 </html>
 </div>
+<div><!-- Standalone Minimalist Bible Verse Section -->
+<div class="standalone-verse-container">
+    <p class="verse-text">"For with God nothing will be impossible."</p>
+    <p class="verse-citation">Luke 1:37</p>
+</div>
+
+<style>
+    .standalone-verse-container {
+        text-align: center;
+        color: #64748b; /* Soft gray color */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        line-height: 1.6;
+        margin: 24px auto;
+        max-width: 800px;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .standalone-verse-container .verse-text {
+        margin: 0 0 4px 0;
+        font-style: italic;
+    }
+
+    .standalone-verse-container .verse-citation {
+        margin: 0;
+        font-weight: 500;
+        font-size: 11px;
+        letter-spacing: 0.02em;
+    }
+
+    @media screen and (max-width: 768px) {
+        .standalone-verse-container {
+            font-size: 11px;
+        }
+    }
+</style></div>
             ]]>
         </content>
     </entry>
@@ -183,7 +220,7 @@
         <id>https://freedomremedies.com/how-to-stop-a-cold-sore-fast/</id>
             <category term="Articles"/>
 
-        <updated>2026-08-05T02:37:54-04:00</updated>
+        <updated>2026-08-05T21:41:40-04:00</updated>
             <summary type="html">
                 <![CDATA[
                     Feel a cold sore coming? If you are currently experiencing an outbreak or feel one coming and are looking for&hellip;
@@ -203,6 +240,43 @@
   <p>
     
   </p>
+<div><!-- Standalone Minimalist Bible Verse Section -->
+<div class="standalone-verse-container">
+    <p class="verse-text">"For with God nothing will be impossible."</p>
+    <p class="verse-citation">Luke 1:37</p>
+</div>
+
+<style>
+    .standalone-verse-container {
+        text-align: center;
+        color: #64748b; /* Soft gray color */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        line-height: 1.6;
+        margin: 24px auto;
+        max-width: 800px;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .standalone-verse-container .verse-text {
+        margin: 0 0 4px 0;
+        font-style: italic;
+    }
+
+    .standalone-verse-container .verse-citation {
+        margin: 0;
+        font-weight: 500;
+        font-size: 11px;
+        letter-spacing: 0.02em;
+    }
+
+    @media screen and (max-width: 768px) {
+        .standalone-verse-container {
+            font-size: 11px;
+        }
+    }
+</style></div>
             ]]>
         </content>
     </entry>
