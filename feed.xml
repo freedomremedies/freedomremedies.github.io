@@ -3,7 +3,7 @@
     <title>Freedom Remedies</title>
     <link href="https://freedomremedies.com/feed.xml" rel="self" />
     <link href="https://freedomremedies.com" />
-    <updated>2026-08-05T21:41:59-04:00</updated>
+    <updated>2026-08-30T15:01:36-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
@@ -289,7 +289,7 @@
         <id>https://freedomremedies.com/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real/</id>
             <category term="Articles"/>
 
-        <updated>2026-08-05T21:41:10-04:00</updated>
+        <updated>2026-08-30T15:01:36-04:00</updated>
             <summary type="html">
                 <![CDATA[
                     Have you ever had a cold sore? Has it made you feel embarrassed about being seen? Well, guess what? You're&hellip;
@@ -309,43 +309,47 @@
 
     <!-- This section holds the form and will disappear on submission -->
     <div id="form-content_2">
-        <!-- Title & Description Optimized for Pre-Launch Waitlist -->
         <h3 style="margin-top: 0; margin-bottom: 8px; font-size: 22px; color: #0f172a; font-weight: 700; letter-spacing: -0.02em;">Break the Cycle. For Good.</h3>
         <p style="margin-top: 0; margin-bottom: 28px; font-size: 15px; color: #475569; line-height: 1.5;">Be the first to be notified when the protocol is live.</p>
         
-        <!-- Hidden iframe that captures the submission to prevent redirect -->
         <div class="post__iframe"><iframe loading="lazy" name="hidden_iframe_2" id="hidden_iframe_2" style="display:none;" onload="handleFormResponse_2()"></iframe></div>
 
-        <!-- Form pointing directly to your Google Form backend -->
-        <form action="https://docs.google.com/forms/d/e/1FAIpQLScG40yoo5umTCEeirXefS8eUxmHiJuXp_xNK66Q7AE5a9jI0w/formResponse" 
+        <!-- Error display area for blocked signups -->
+        <div id="error-message_2" style="display: none; color: #dc2626; font-size: 14px; background: #fee2e2; padding: 10px 14px; border-radius: 6px; margin-bottom: 14px; text-align: center; font-weight: 500;"></div>
+
+        <form id="waitlist-form_2"
+              action="https://docs.google.com/forms/d/e/1FAIpQLScG40yoo5umTCEeirXefS8eUxmHiJuXp_xNK66Q7AE5a9jI0w/formResponse" 
               method="POST" 
               target="hidden_iframe_2" 
-              onsubmit="submitted_2=true;" 
+              onsubmit="return validateAndSubmit_2(this);" 
               style="display: flex; flex-direction: column; gap: 14px;">
             
-            <!-- 1. First Name Field with your exact ID: 1361566041 -->
+            <!-- SPAM PROTECTION: Honeypot field. Invisible to humans, bots will fill it out. -->
+            <div style="display:none !important; visibility:hidden !important; height:0; width:0; overflow:hidden;" aria-hidden="true">
+                <input type="text" name="middle_name_validation" id="middle_name_validation" autocomplete="off" tabindex="-1">
+            </div>
+
+            <!-- 1. First Name Field -->
             <input type="text" name="entry.1361566041" placeholder="First name" required 
                 style="padding: 14px 18px; font-size: 16px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; background: #f8fafc; color: #0f172a; box-sizing: border-box; width: 100%;">
 
-            <!-- 2. Email Field with your exact ID: 1332825166 -->
-            <input type="email" name="entry.1332825166" placeholder="Email address" required 
+            <!-- 2. Email Field -->
+            <input type="email" id="email_input_2" name="entry.1332825166" placeholder="Email address" required 
                 style="padding: 14px 18px; font-size: 16px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; background: #f8fafc; color: #0f172a; box-sizing: border-box; width: 100%;">
             
-            <!-- High-Conversion Emerald Button -->
             <button type="submit" 
                 style="padding: 16px; font-size: 16px; background-color: #059669; color: #ffffff; font-weight: 600; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; box-sizing: border-box; width: 100%; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);"
                 onmouseover="this.style.backgroundColor='#047857'" onmouseout="this.style.backgroundColor='#059669'">
                 Secure My Priority Spot
             </button>
             
-            <!-- Mandatory Privacy Reassurance for sensitive health tracking -->
             <p style="font-size: 11px; color: #64748b; text-align: center; margin-top: 12px; margin-bottom: 0;">
                 🔒 Your privacy is fully protected. 100% confidential priority list.
             </p>
         </form>
     </div>
 
-    <!-- Hidden Confirmation Message (Becomes visible after successful submission) -->
+    <!-- Hidden Confirmation Message -->
     <div id="success-message_2" style="display: none; text-align: center; padding: 20px 0;">
         <div style="font-size: 40px; margin-bottom: 16px;">🎉</div>
         <h3 style="margin-top: 0; margin-bottom: 8px; font-size: 22px; color: #0f172a; font-weight: 700;">You're on the list!</h3>
@@ -354,15 +358,48 @@
 </div>
 
 <script type="text/javascript">
-    // Track submission state for form 2
     var submitted_2 = false;
 
-    // Handles the transition from form to success message for form 2
+    // List of common/high-risk disposable email keywords and domains
+    const blockedDomains = [
+        'emalupe.com', 'tempmail', 'throwawaymail', 'guerrillamail', 
+        '10minutemail', 'sharklasers', 'mailinator', 'yopmail'
+    ];
+
+    function validateAndSubmit_2(form) {
+        const errorDiv = document.getElementById('error-message_2');
+        errorDiv.style.display = 'none';
+
+        // 1. Honeypot check: If this hidden field has text, it's a bot.
+        const honeypot = document.getElementById('middle_name_validation').value;
+        if (honeypot.length > 0) {
+            console.log("Bot detected via honeypot.");
+            // Quietly pretend it worked or show success to trick the bot into leaving
+            document.getElementById('form-content_2').style.display = 'none';
+            document.getElementById('success-message_2').style.display = 'block';
+            return false; 
+        }
+
+        // 2. Disposable Email check
+        const emailValue = document.getElementById('email_input_2').value.toLowerCase();
+        
+        // Check if the email contains any of our blocked words/domains
+        const isSpamEmail = blockedDomains.some(domain => emailValue.includes(domain));
+        
+        if (isSpamEmail) {
+            errorDiv.innerText = "Please use a valid, permanent email address.";
+            errorDiv.style.display = 'block';
+            return false; // Blocks form submission entirely
+        }
+
+        // If passes checks, allow submission to Google Forms
+        submitted_2 = true;
+        return true;
+    }
+
     function handleFormResponse_2() {
         if (submitted_2) {
-            // Hide the input fields and text
             document.getElementById('form-content_2').style.display = 'none';
-            // Show the success confirmation message
             document.getElementById('success-message_2').style.display = 'block';
         }
     }
