@@ -3,7 +3,7 @@
     <title>Freedom Remedies</title>
     <link href="https://freedomremedies.com/feed.xml" rel="self" />
     <link href="https://freedomremedies.com" />
-    <updated>2026-09-28T18:18:40-04:00</updated>
+    <updated>2026-09-28T18:19:27-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
@@ -289,7 +289,7 @@
         <id>https://freedomremedies.com/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real/</id>
             <category term="Articles"/>
 
-        <updated>2026-09-28T18:18:40-04:00</updated>
+        <updated>2026-09-28T18:19:27-04:00</updated>
             <summary type="html">
                 <![CDATA[
                     Have you ever had a cold sore? Has it made you feel embarrassed about being seen? Well, guess what? You're&hellip;
@@ -323,7 +323,7 @@
         <!-- Left Column: Ebook Cover Showcase -->
         <div style="flex: 1; min-width: 280px; max-width: 340px; text-align: center; border: none !important;">
             <!-- REPLACE 'your-ebook-cover.jpg' with your actual Publii image path or external URL -->
-            <img loading="lazy" src="your-ebook-cover.jpg" alt="Ebook Cover" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: block; margin: 0 auto; border: none !important;" data-is-external-image="true">
+            <img loading="lazy" src="Say Goodbye Protocol Cover Image.jpg" alt="Ebook Cover" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: block; margin: 0 auto; border: none !important;" data-is-external-image="true">
         </div>
         
         <!-- Right Column: Pitch & Purchase Conversion -->
