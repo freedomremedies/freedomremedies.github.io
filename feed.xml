@@ -3,7 +3,7 @@
     <title>Freedom Remedies</title>
     <link href="https://freedomremedies.com/feed.xml" rel="self" />
     <link href="https://freedomremedies.com" />
-    <updated>2026-09-28T18:10:36-04:00</updated>
+    <updated>2026-09-28T18:18:40-04:00</updated>
     <author>
         <name>anonymous</name>
     </author>
@@ -289,7 +289,7 @@
         <id>https://freedomremedies.com/you-can-say-goodbye-to-cold-sores-forever-yes-it-is-actually-possible-for-real/</id>
             <category term="Articles"/>
 
-        <updated>2026-09-28T18:10:36-04:00</updated>
+        <updated>2026-09-28T18:18:40-04:00</updated>
             <summary type="html">
                 <![CDATA[
                     Have you ever had a cold sore? Has it made you feel embarrassed about being seen? Well, guess what? You're&hellip;
@@ -323,14 +323,14 @@
         <!-- Left Column: Ebook Cover Showcase -->
         <div style="flex: 1; min-width: 280px; max-width: 340px; text-align: center; border: none !important;">
             <!-- REPLACE 'your-ebook-cover.jpg' with your actual Publii image path or external URL -->
-            <img loading="lazy" src="Say Goodbye Protocol Cover Image.jpg" alt="Ebook Cover" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: block; margin: 0 auto; border: none !important;" data-is-external-image="true">
+            <img loading="lazy" src="your-ebook-cover.jpg" alt="Ebook Cover" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15); display: block; margin: 0 auto; border: none !important;" data-is-external-image="true">
         </div>
         
         <!-- Right Column: Pitch & Purchase Conversion -->
         <div style="flex: 1.2; min-width: 280px; max-width: 480px; border: none !important;">
             <!-- Ebook Title -->
             <h1 style="margin: 0 0 12px 0; font-size: 28px; color: #0f172a; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; border: none !important;">
-                Break the Cycle. For Good.
+                The Ultimate Guide Title
             </h1>
             
             <!-- Ebook Subtitle / Short Pitch -->
@@ -350,12 +350,12 @@
             
             <!-- Action Button / Purchase Link -->
             <!-- REPLACE '#' with your actual Gumroad, Stripe, or checkout link -->
-            <a href="https://freedomremedies.com/say-goodbye-to-cold-sores-forever-about-page/" 
+            <a href="#" 
                style="display: inline-block; width: 100%; text-align: center; padding: 16px 36px; font-size: 16px; background-color: #059669; color: #ffffff; font-weight: 600; border: none !important; border-radius: 8px; cursor: pointer; text-decoration: none !important; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2); box-sizing: border-box;"
                onmouseover="this.style.backgroundColor='#047857'; this.style.transform='translateY(-1px)';" 
                onmouseout="this.style.backgroundColor='#059669'; this.style.transform='translateY(0)';"
                class="ignore-theme-lines">
-                GET INSTANT ACCESS NOW
+                BUY THE EBOOK NOW
             </a>
         </div>
         
@@ -397,7 +397,8 @@
         text-align: left;
     }
 }
-</style></div>
+</style>
+</div>
 <div><div class="testimonial-section">
     <div class="testimonial-header">
         <h2>What Some Participants Say</h2>
